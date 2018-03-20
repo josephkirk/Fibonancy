@@ -12,7 +12,7 @@ class Fibonanci(object):
         self.method[method](n)
 
     def __repr__(self):
-        return "{}:{}".format(self.__class__.__name__, ' '.join([str(num) for id, num in self._sequence.iteritems()]))
+        return "{}:{}".format(self.__class__.__name__, ' '.join([str(num) for id, num in self._sequence.items()]))
 
     def topDown(self, n):
         if n in self._sequence:
@@ -25,15 +25,15 @@ class Fibonanci(object):
         return f
 
     def bottomUp(self, n):
-        for k in range(n):
+        for k in range(n+1):
             if k <=2:
                 f = 1
             else:
-                f = self._sequence[n-1] + self._sequence[n-2]
+                f = self._sequence[k-1] + self._sequence[k-2]
             self._sequence[k]=f
         return self._sequence[n]
     @property
-    def sequence(self):
+    def sequence(self): 
         return self._sequence[self.n]
 
     @sequence.setter
@@ -42,7 +42,6 @@ class Fibonanci(object):
         self.n = n
 
 if __name__ == '__main__':
-    fib = Fibonanci()
-    fib.sequence = 102
-    print fib.sequence
+    fib = Fibonanci(1000, method='bottomUp')
+    print(fib.sequence)
 
